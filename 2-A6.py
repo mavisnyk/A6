@@ -25,7 +25,7 @@ valores_estat = {}
 valores_estat_amostrais = {}
 
 #Dados Amostrais e tamanho
-coluna_amostral = ['age', 'gluc', 'smoke', 'cardio'] # colunas para amostrar
+coluna_amostral = ['age', 'gluc', 'smoke', 'alco', 'cardio'] # colunas para amostrar
 n_amostral = 100 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
 tamanho_amostral = [5,35] # tamanhos de cada amostra
 amostras = {} #dic/armazenamento
@@ -77,7 +77,7 @@ for coluna in coluna_amostral:
         valores_estat_amostrais[coluna][tamanho] = {
             "media": [],
             "variancia": [],
-            "desvio padrão": []
+            "desvio": []
         }
         for i in range(n_amostral):
             amostra = amostras[coluna][tamanho][i]
@@ -88,7 +88,7 @@ for coluna in coluna_amostral:
             valores_estat_amostrais[coluna][tamanho]["variancia"].append(variancia)
             valores_estat_amostrais[coluna][tamanho]["desvio"].append(desvio)
 
-sns.histplot(valores_estat_amostrais['alco'][5]['media'], kde=true)
+sns.histplot(valores_estat_amostrais['alco'][5]['media'], kde=True)
 plt.hist("Média")
 plt.title("Histograma da Média (Coluna 3, Tamanho 5)")
 plt.show()
