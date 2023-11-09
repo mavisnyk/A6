@@ -17,7 +17,7 @@ limite_superior_lo = 300  # Define o limite superior para ap_lo
 df['ap_hi'] = df['ap_hi'].apply(lambda x: x if x <= limite_superior_hi else np.nan)
 df['ap_lo'] = df['ap_lo'].apply(lambda x: x if x <= limite_superior_lo else np.nan)
 
-#Colunas para não plotar
+#Colunas para não plotar diretamente
 colunas_excluir = ['age','gender','cholesterol','gluc','smoke','alco','active','cardio']
 
 #Para armazenados dados
@@ -66,7 +66,7 @@ for coluna in df.columns:
         caminho_para_salvar = 'Figuras/' + nome_do_arquivo
         plt.savefig(caminho_para_salvar)
 
-        #plt.show()
+plt.show()
 
 pprint(valores_estat)
 

@@ -80,7 +80,7 @@ for coluna in coluna_amostral:
             "desvio": []
         }
         for i in range(n_amostral):
-            amostra = amostras[coluna][tamanho][i]
+            amostra = amostras[colunas][tamanho][i]
             media = np.mean(amostra)
             variancia = np.var(amostra)
             desvio = np.std(amostra)
