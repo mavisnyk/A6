@@ -26,9 +26,31 @@ valores_estat_amostrais = {}
 
 #Dados Amostrais e tamanho
 coluna_amostral = ['age', 'gluc', 'smoke', 'alco', 'cardio'] # colunas para amostrar
-n_amostral = 1 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
+n_amostral = 10 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
 tamanho_amostral = [5,35] # tamanhos de cada amostra
 amostras_pop = {} #dic/armazenamento
+
+# Função para plotar gráficos
+def plotar_graficos(coluna, tamanho_amostral):
+    plt.figure(figsize=(12, 6))
+    
+    # Gráfico da média das médias amostrais
+    plt.subplot(1, 2, 1)
+    sns.histplot(valores_estat_amostrais[coluna][tamanho_amostral]["media"], kde=True)
+    plt.title(f"Histograma da Média (Coluna {coluna}, Tamanho {tamanho_amostral})")
+    
+    # Gráfico da média das variâncias amostrais
+    plt.subplot(1, 2, 2)
+    sns.histplot(valores_estat_amostrais[coluna][tamanho_amostral]["variancia"], kde=True)
+    plt.title(f"Histograma da Variância (Coluna {coluna}, Tamanho {tamanho_amostral})")
+
+    plt.tight_layout()
+    
+    # Salvar os gráficos em vez de exibi-los
+    nome_do_arquivo = f'histogramas_{coluna}_{tamanho_amostral}.png'
+    caminho_para_salvar = 'Figuras/Histogramas/' + nome_do_arquivo
+    plt.savefig(caminho_para_salvar)
+    plt.close()
 
 for col in df.columns:
 
@@ -58,6 +80,10 @@ for col in df.columns:
             valores_estat_amostrais[col][tamanho]["media"].append(media_amostral)
             valores_estat_amostrais[col][tamanho]["variancia"].append(variancia_amostral)
             valores_estat_amostrais[col][tamanho]["desvio"].append(desvio_amostral)
+
+for coluna in colunas_bin:
+    for tamanhos_amostrais in tamanho_amostral:
+        plotar_graficos(coluna, tamanhos_amostrais) 
 
 pprint(valores_estat_pop)
 pprint(valores_estat_amostrais)
