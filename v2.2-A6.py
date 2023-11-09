@@ -26,7 +26,7 @@ valores_estat_amostrais = {}
 
 #Dados Amostrais e tamanho
 coluna_amostral = ['age', 'gluc', 'smoke', 'alco', 'cardio'] # colunas para amostrar
-n_amostral = 100000 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
+n_amostral = 10 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
 tamanho_amostral = [5,35] # tamanhos de cada amostra
 amostras_pop = {} #dic/armazenamento
 
