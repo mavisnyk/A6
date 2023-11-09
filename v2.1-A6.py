@@ -26,7 +26,7 @@ valores_estat_amostrais = {}
 
 #Dados Amostrais e tamanho
 coluna_amostral = ['age', 'gluc', 'smoke', 'alco', 'cardio'] # colunas para amostrar
-n_amostral = 100 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
+n_amostral = 1 # quantidade n de amostras (100 mil é o exercícios, fazer os testes com menos, python demora)
 tamanho_amostral = [5,35] # tamanhos de cada amostra
 amostras_pop = {} #dic/armazenamento
 
@@ -36,15 +36,28 @@ for col in df.columns:
     media = data.mean()
     variancia = data.var()
     desvio = data.std()
-    valores_estat_pop[col] = (media, variancia, desvio) #armazenando dasdos populacionais
+    valores_estat_pop[col] = (media, variancia, desvio) #armazenando dados populacionais
     
-    # Coleta das amostras
+    #Inicio
     amostras_pop[col] = {}
+    valores_estat_amostrais[col] = {}
+
+    # Coleta das amostras
     for tamanho in tamanho_amostral:
         amostras_pop[col][tamanho] = []
+        valores_estat_amostrais[col][tamanho] = {"media": [], "variancia": [], "desvio": []}
+
         for _ in range(n_amostral):
             amostra = df[col].sample(n = tamanho, replace=True).values
             amostras_pop[col][tamanho].append(amostra)
+
+            media_amostral = np.mean(amostra)
+            variancia_amostral = np.var(amostra)
+            desvio_amostral = np.std(amostra)
+
+            valores_estat_amostrais[col][tamanho]["media"].append(media_amostral)
+            valores_estat_amostrais[col][tamanho]["variancia"].append(variancia_amostral)
+            valores_estat_amostrais[col][tamanho]["desvio"].append(desvio_amostral)
 
 pprint(valores_estat_pop)
 pprint(valores_estat_amostrais)
